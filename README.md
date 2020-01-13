@@ -1,3 +1,5 @@
+# Toy BlackJack
+
 Simulation of a BlackJack Toy Model. It follows the same idea as standard BlackJack,
 but with simplified rules.
 There is no splitting of pairs or doubling up bets, thus, the only
@@ -11,7 +13,7 @@ each of them following a different strategy.
 ### Basic:
 The Basic player always makes the same bet and follows a simple strategy
 that takes into account the current value of the hand and the dealer's card that is public.
-More details can be found here:
+More details can be found here:     
 https://bicyclecards.com/how-to-play/blackjack/
 
 ### Simplest Player:
