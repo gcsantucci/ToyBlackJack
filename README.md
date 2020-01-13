@@ -13,7 +13,7 @@ each of them following a different strategy.
 ### Basic:
 The Basic player always makes the same bet and follows a simple strategy
 that takes into account the current value of the hand and the dealer's card that is public.
-More details can be found here:     
+More details can be found here:
 https://bicyclecards.com/how-to-play/blackjack/
 
 ### Simplest Player:
