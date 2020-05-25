@@ -44,20 +44,22 @@ class QPlayer(Player):
         self.d, self.s = self.GetState()
         return self.ExploreOrExploit()
 
-    def ActionResponse(self, action):
+    def ActionResponse(self, action, win=None):
         if not self.update:
             return
         if action == 0:
             new_state = self.s
+            if win >= 0:
+                reward = 20.
+            else:
+                reward = -10.
         else:
             _, new_state = self.GetState()
-        total = new_state + self.offset
-        if total == 22:
-            reward = -10.
-        elif total >= 17:
-            reward = 20. if action == 0 else -10.
-        else:
-            reward = 5 if action == 1 else -5
+            total = new_state + self.offset
+            if total == 22:
+                reward = -20.
+            else:
+                reward = 10.
         self.Update(reward, action, new_state)
 
     def Save(self, name='qtables/qtable.npy'):

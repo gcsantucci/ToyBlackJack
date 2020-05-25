@@ -76,11 +76,16 @@ class Round:
                     player.ActionResponse(action)
                 action = player.TakeAction(dealer_card)
             if player.name == 'Q':
-                player.ActionResponse(action)
+                player.ActionResponse(action, player.Win(self.dealer))
 
         while self.dealer.TakeAction():
             card = self.GiveCard()
             self.dealer.AddCard(card)
+
+        for player in self.nplayers:
+            if player.name != 'Q':
+                continue
+            player.FinalResponse(player.Win(self.dealer))
 
     def PayOuts(self):
         for player in self.nplayers:
