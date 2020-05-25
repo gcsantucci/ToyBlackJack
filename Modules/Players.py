@@ -1,6 +1,7 @@
 import numpy as np
 from Counter import Counter
 
+
 class Player(Counter):
     def __init__(self, name='BasicPlayer', stack=100_000, count=0):
         Counter.__init__(self, count=count)
@@ -20,15 +21,9 @@ class Player(Counter):
         if card in [1, 7, 8, 9, 10]:
             return 1
         elif card in [4, 5, 6]:
-            if total < 12:
-                return 1
-            else:
-                return 0
+            return 1 if total < 12 else 0
         else:
-            if total < 13:
-                return 1
-            else:
-                return 0
+            return 1 if total < 13 else 0
 
     def GetBet(self):
         return self.bet
@@ -101,6 +96,29 @@ class BadPlayer(Player):
         return 0 if self.GetTotal() >= 17 else 1
 
 
+class OKPlayer(Player):
+    def __init__(self):
+        self.name = 'OK'
+
+    def SetBet(self, ncards):
+        tcount = self.GetTrueCount(ncards)
+        if tcount > 5:
+            self.bet = 50
+        elif tcount < -5:
+            self.bet = 200
+        else:
+            self.bet = 100
+
+    def TakeAction(self, _=None):
+        total = self.GetTotal()
+        if total < 17:
+            return 1
+        elif total > 17:
+            return 0
+        else:  # soft vs hard 17
+            return 1 if 1 in self.cards else 0
+
+
 class ChartPlayer(Player):
     # https://www.blackjackapprenticeship.com/blackjack-strategy-charts/
     def __init__(self, stack=10_000, count=0):
@@ -161,26 +179,3 @@ class ChartPlayer(Player):
         if 1 in self.cards:
             return self.SoftTotals(card)
         return self.HardTotals(card)
-
-
-class OptimalPlayer(Player):
-    def __init__(self):
-        self.name = 'Optimal'
-
-    def SetBet(self, ncards):
-        tcount = self.GetTrueCount(ncards)
-        if tcount > 5:
-            self.bet = 50
-        elif tcount < -5:
-            self.bet = 200
-        else:
-            self.bet = 100
-
-    def TakeAction(self, _=None):
-        total = self.GetTotal()
-        if total < 17:
-            return 1
-        elif total > 17:
-            return 0
-        else:
-            return 1 if 1 in self.cards else 0  # soft vs hard 17

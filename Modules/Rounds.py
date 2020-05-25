@@ -65,12 +65,19 @@ class Round:
         dealer_card = self.dealer.cards[0]
         for player in self.nplayers:
             player.CountTable(self.nplayers, dealer_card)
+            if player.BlackJack():
+                continue
             action = player.TakeAction(dealer_card)
             while action:
                 card = self.GiveCard()
                 player.AddCard(card)
                 player.CountCard(card)
+                if player.name == 'Q':
+                    player.ActionResponse(action)
                 action = player.TakeAction(dealer_card)
+            if player.name == 'Q':
+                player.ActionResponse(action)
+
         while self.dealer.TakeAction():
             card = self.GiveCard()
             self.dealer.AddCard(card)

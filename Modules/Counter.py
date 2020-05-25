@@ -1,7 +1,8 @@
 import numpy as np
 
+
 class Counter:
-    # https://www.blackjackapprenticeship.com/how-to-count-cards/ 
+    # https://www.blackjackapprenticeship.com/how-to-count-cards/
     def __init__(self, count=0):
         self.count = count
 
