@@ -4,6 +4,7 @@ from Players import Player
 
 class QPlayer(Player):
     # https://towardsdatascience.com/simple-reinforcement-learning-q-learning-fcddc4b6fe56
+    # https://www.learndatasci.com/tutorials/reinforcement-q-learning-scratch-python-openai-gym/
     def __init__(self, stack=10_000, count=0, eps=0.2, alpha=0.1, gamma=0.9, load=False, update=True):
         Player.__init__(self, name='Q', stack=stack, count=count)
         self.eps = eps  # percentage of exploration

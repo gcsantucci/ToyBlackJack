@@ -82,11 +82,6 @@ class Round:
             card = self.GiveCard()
             self.dealer.AddCard(card)
 
-        for player in self.nplayers:
-            if player.name != 'Q':
-                continue
-            player.FinalResponse(player.Win(self.dealer))
-
     def PayOuts(self):
         for player in self.nplayers:
             player.CountCards(self.dealer.cards[1:])
